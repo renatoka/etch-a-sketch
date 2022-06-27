@@ -5,9 +5,16 @@ const items = document.querySelectorAll('.item');
 let defaultColor;
 let rgbColor;
 
+/* function randomColor() {
+    rgbColor = '#'+(Math.random().toString(16)+'00000').slice(2,8);
+} */
+
 function randomColor() {
-    rgbColor = '#' + (Math.random().toString(16) + '00000').slice(2, 8);
-    return rgbColor;
+    let color = [];
+    for (let i = 0; i < 3; i++) {
+        color.push(Math.floor(Math.random() * 256));
+    }
+    return 'rgb(' + color.join(', ') + ')';
 }
 
 buttons.forEach((button) => {
@@ -26,16 +33,14 @@ buttons.forEach((button) => {
         }
 
         else if (button.className == 'rgb-color') {
-            randomColor();
-            defaultColor = rgbColor;
+            defaultColor = randomColor();
         }
 
     });
-});
 
-
-items.forEach((item) => {
-    item.addEventListener("mouseover", function () {
-        item.style.backgroundColor = defaultColor;
+    items.forEach((item) => {
+        item.addEventListener("mouseover", function () {
+            item.style.backgroundColor = defaultColor;
+        });
     });
-}); 
+});
